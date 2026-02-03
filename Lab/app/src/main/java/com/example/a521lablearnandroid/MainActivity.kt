@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.Gray)
+                    .background(Color.LightGray)
                     .padding(32.dp)
             ) {
 

@@ -6,15 +6,23 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.withInfiniteAnimationFrameMillis
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 class ListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,25 +36,38 @@ class ListActivity : ComponentActivity() {
 
 @Composable
 fun ListScreen() {
-    Column(modifier = Modifier.background(Color.Red)
-        .padding(16.dp)
-
+    Column(
+        modifier = Modifier.fillMaxSize().background(Color(0xFFB00000)).padding(16.dp)
     ) {
-        Column(modifier = Modifier.background(Color.Gray)
-            .padding(16.dp)
-
+        Column(
+            modifier = Modifier.fillMaxSize().background(Color.Gray, shape = RoundedCornerShape(24.dp)).padding(16.dp)
         ) {
-            LazyColumn() {
-                items(allKantoPokemon.size) {index ->
+            Column(
+                modifier = Modifier.fillMaxSize().background(Color.White, shape = RoundedCornerShape(24.dp)).padding(16.dp)
+            ) {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(allKantoPokemon.size) { index ->
                     val item = allKantoPokemon[index]
-                    Text(text = item.name)
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "#${item.number}  ${item.name.lowercase()}",
+                            fontSize = 35.sp
+                        )
+                    }
+                    }
                 }
             }
         }
-
     }
-
 }
+
 data class Pokemon(
     val name: String,
     val number: Int
